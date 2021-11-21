@@ -1,11 +1,12 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Api, IApi } from './services/apis';
+import { Moment } from 'moment';
+import { StyledApp } from './styles';
 // Components
 import { Countdown } from './components/countdown';
 import { CountdownInputStart } from './components/countdown-input-start';
 import { Header } from './components/header';
-import { Moment } from 'moment';
 
 const api: IApi = new Api();
 
@@ -42,9 +43,11 @@ class App extends React.Component {
     return (
       this.state.theme && (
         <ThemeProvider theme={data}>
-          <Header/>
-          <CountdownInputStart onChange={this.onDatetimeSet}/>
-          <Countdown datetime={this.state.datetime}/>
+          <StyledApp>
+            <Header/>
+            <CountdownInputStart onChange={this.onDatetimeSet}/>
+            <Countdown datetime={this.state.datetime}/>
+          </StyledApp>
         </ThemeProvider>
       )
     )

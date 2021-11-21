@@ -1,10 +1,10 @@
 import React from 'react';
-import { StyledHeader } from './styles';
+import { StyledHeader, StyledImg} from './styles';
 
 export const Header = () => {
     return (
         <StyledHeader>
-            <img src="koala-logo.png" />
+            <StyledImg src="koala-logo.png" />
             <h1>Koala Web Engineer Coding Challenge</h1>
         </StyledHeader>
     );
