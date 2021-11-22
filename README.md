@@ -20,6 +20,16 @@ We have intentionally kept this assignment open-ended, but here are the minimum 
 ### Dependencies
 This codebase uses React, Typescript, and Styled Components as they are the primary dependencies used by the Koala frontends. Though you may change any existing code as you see fit, we ask that you do not change these dependencies (i.e. rewriting the app in Angular). However, feel free to add any additional dependencies as you see fit.
 
+## Features implemented
+1. Calendar as Datetime picker
+1. Mobile first desing (desctop and mobile friendly)
+1. Integrated support for Environment Variable
+1. Refactored project structure (components (dumb, smart), services)
+
+## Nest steps
+1. Add unit tests
+1. Add support for service worker
+
 ### Installation
 
 1. Install [`Yarn`](https://yarnpkg.com/en/) and [`TypeScript`](https://www.typescriptlang.org)
