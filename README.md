@@ -25,6 +25,7 @@ This codebase uses React, Typescript, and Styled Components as they are the prim
 1. Mobile first desing (desctop and mobile friendly)
 1. Integrated support for Environment Variable
 1. Refactored project structure (components (dumb, smart), services)
+1. Deploy to Github-pages (https://andreysurzhan.github.io/frontend-engineer-challenge/)
 
 ## Nest steps
 1. Add unit tests
