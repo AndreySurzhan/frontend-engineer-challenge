@@ -1,6 +1,6 @@
 import { Duration } from 'moment';
 import React from 'react';
-import { StyledCountdown } from './styles';
+import { StyledCountdownContainer, StyledCountdownTitle } from './styles';
 
 export interface CountdownProps {
   duration?: Duration;
@@ -17,13 +17,15 @@ export const Countdown = (props: CountdownProps) => {
   const isEvenReached = sec !== undefined && sec <= 0;
 
   return (
-    <StyledCountdown>
-      {duration && sec
-        ? isEvenReached 
-          ? 'Event Reached' 
-          :`${days} days ${hours}:${mins}:${sec}`
-        : 'Target Date is Not Specified'}
-    </StyledCountdown>
+    <StyledCountdownContainer>
+      <StyledCountdownTitle>
+        {duration && sec
+          ? isEvenReached 
+            ? 'Event Reached' 
+            :`${days} days ${hours}:${mins}:${sec}`
+          : 'Target Date is Not Specified'}
+      </StyledCountdownTitle>
+    </StyledCountdownContainer>
   );
 };
 
