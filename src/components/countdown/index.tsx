@@ -14,12 +14,12 @@ export const Countdown = (props: CountdownProps) => {
   const mins = duration && duration.minutes();
   const sec = duration && duration.seconds();
 
-  const isEvenReached = sec !== undefined && sec <= 0;
+  const isEvenReached = sec !== undefined && sec < 0;
 
   return (
     <StyledCountdownContainer>
       <StyledCountdownTitle>
-        {duration && sec
+        {duration && sec !== undefined
           ? isEvenReached 
             ? 'Event Reached' 
             :`${days} days ${hours}:${mins}:${sec}`
