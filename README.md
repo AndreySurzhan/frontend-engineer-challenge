@@ -26,12 +26,12 @@ This codebase uses React, Typescript, and Styled Components as they are the prim
 1. Integrated support for Environment Variable
 1. Refactored project structure (components (dumb, smart), services)
 1. Deploy to Github-pages (https://andreysurzhan.github.io/frontend-engineer-challenge/)
+1. Added support for auto build and deploy to Github pages on commit to `main`
 
 ## Nest steps
 1. Add unit tests
 1. Add support for service worker
 1. Update manifest to include more icons and discription
-1.  
 
 ### Installation
 
