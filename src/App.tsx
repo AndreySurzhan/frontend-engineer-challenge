@@ -1,7 +1,7 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Api, IApi } from './services/apis';
-import moment, { Moment, duration, isMoment, Duration } from 'moment';
+import moment, { Moment, duration, Duration } from 'moment';
 import { StyledApp } from './styles';
 // Components
 import { Countdown } from './components/countdown';
@@ -12,16 +12,14 @@ const api: IApi = new Api();
 
 interface StateProps {
   theme: any;
-  targetDatetime: Moment;
-  datetimeDurationFromTargetDate: Duration;
+  duration?: Duration;
+  eventDate?: Moment;
 }
 
 class App extends React.Component {
   private intervalId: number = 0;
   state: StateProps = {
-    theme: null,
-    targetDatetime: moment(),
-    datetimeDurationFromTargetDate: {} as Duration
+    theme: null
   };
 
   async componentDidMount() {
@@ -32,35 +30,28 @@ class App extends React.Component {
     } catch (error) {
       console.log(error)
     }
-
-    const targetDatetime = moment(); //get date from localStorage
-
-    this.setState({ targetDatetime });
-
-    this.intervalId = setInterval(this.countdownfromTargetDate(targetDatetime), 1000);
   }
 
   componentWillUnmount(){
     clearInterval(this.intervalId);
   }
 
-  countdownfromTargetDate = (targetDatetime: Moment) => () => {
-    const duration: Duration = this.getCountdownDuration(targetDatetime);
+  countdownFromTargetDate = (eventDate?: Moment) => () => {
+    const duration: Duration | null = this.getCountdownDuration(eventDate);
 
-    this.setState({ datetimeDurationFromTargetDate: duration.months() });
+    this.setState({ duration });
   }
 
-  onDatetimeSet = (value: Moment | string) => {
-    if(!isMoment(value)) throw new Error('Input Date is invalid');
+  onDatetimeSet = (eventDate?: Moment | string) => {
+    this.setState({eventDate});
 
-    const targetDatetime: number = this.getCountdownDuration(value).days();
+    clearInterval(this.intervalId);
 
-    this.setState({ targetDatetime });
+    this.intervalId = setInterval(this.countdownFromTargetDate(moment(eventDate)), 1000);
   }
 
-  getCountdownDuration = (value: Moment): Duration => 
-    duration(Math.max(value.valueOf() - (Math.floor(Date.now() / 1000)), 0), 'seconds');
-
+  getCountdownDuration = (eventDate?: Moment): Duration | null => eventDate ? duration(eventDate.diff(moment.now())) : null;
+    
   render() {
     const data = this.state.theme && this.state.theme.data && this.state.theme.data.data;
 
@@ -69,8 +60,8 @@ class App extends React.Component {
         <ThemeProvider theme={data}>
           <StyledApp>
             <Header/>
-            <CountdownInputStart onChange={this.onDatetimeSet}/>
-            <Countdown datetime={this.state.datetimeDurationFromTargetDate}/>
+            <CountdownInputStart value={this.state.eventDate} onChange={this.onDatetimeSet}/>
+            <Countdown duration={this.state.duration}/>
           </StyledApp>
         </ThemeProvider>
       )
