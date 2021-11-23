@@ -22,11 +22,11 @@ This codebase uses React, Typescript, and Styled Components as they are the prim
 
 ## Features implemented
 1. Calendar as Datetime picker
-1. Mobile first desing (desctop and mobile friendly)
+1. Mobile first desing (desktop and mobile friendly)
 1. Integrated support for Environment Variable
 1. Refactored project structure (components (dumb, smart), services)
 1. Deploy to Github-pages (https://andreysurzhan.github.io/frontend-engineer-challenge/)
-1. Added support for auto build and deploy to Github pages on commit to `main`
+1. Added support for auto build and deploy to Github pages on commit to `main` branch
 
 ## Nest steps
 1. Add unit tests

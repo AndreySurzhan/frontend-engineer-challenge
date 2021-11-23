@@ -17,11 +17,16 @@ interface StateProps {
 }
 
 class App extends React.Component {
-  private intervalId: number = 0;
+  private countdownIntervalId: number = 0;
   state: StateProps = {
     theme: null
   };
 
+  /**
+   * React Hook. 
+   * Fetches theme config data before component is mounted.
+   * @returns {void}
+ */
   async componentDidMount() {
     try {
       const themeData = await api.getTheme();
@@ -32,24 +37,47 @@ class App extends React.Component {
     }
   }
 
+  /**
+   * React Hook. 
+   * Clears countdown interval when component is being removed from DOM.
+   * @returns {void}
+ */
   componentWillUnmount(){
-    clearInterval(this.intervalId);
+    clearInterval(this.countdownIntervalId);
   }
 
-  countdownFromTargetDate = (eventDate?: Moment) => () => {
+  /**
+   * Callback function to pass to CountdownInputStart component.
+   * This function is supposed to be called with current context when user selects data/time in datetime picker input.
+   * Function sets eventDate, clears countdown existing interval and sets new interval with new passed date
+   * @param {Moment | null} eventDate - Date in Moment format that represents when Future event is supposed to start.
+   * @returns {void}
+ */
+   handleEventDateSet = (eventDate?: Moment | string): void => {
+    this.setState({eventDate});
+
+    clearInterval(this.countdownIntervalId);
+
+    this.countdownIntervalId = setInterval(this.countdownFromEventtDate(moment(eventDate)), 1000);
+  }
+
+  /**
+   * Function that returns a callback function that is used as callback for setInterval function. 
+   * Calback function gets duration and sets it to state.
+   * @param {Moment | null} eventDate - Date in Moment format that represents when Future event is supposed to start.
+   * @returns {Function}
+ */
+  countdownFromEventtDate = (eventDate?: Moment): Function => () => {
     const duration: Duration | null = this.getCountdownDuration(eventDate);
 
     this.setState({ duration });
   }
 
-  onDatetimeSet = (eventDate?: Moment | string) => {
-    this.setState({eventDate});
-
-    clearInterval(this.intervalId);
-
-    this.intervalId = setInterval(this.countdownFromTargetDate(moment(eventDate)), 1000);
-  }
-
+  /**
+   * Function that returns calculated duration between Event Date and Now date
+   * @param {Moment | null} eventDate - Date in Moment format that represents when Future event is supposed to start.
+   * @returns {Duration | null}
+ */
   getCountdownDuration = (eventDate?: Moment): Duration | null => eventDate ? duration(eventDate.diff(moment.now())) : null;
     
   render() {
@@ -60,7 +88,7 @@ class App extends React.Component {
         <ThemeProvider theme={data}>
           <StyledApp>
             <Header/>
-            <CountdownInputStart value={this.state.eventDate} onChange={this.onDatetimeSet}/>
+            <CountdownInputStart value={this.state.eventDate} onChange={this.handleEventDateSet}/>
             <Countdown duration={this.state.duration}/>
           </StyledApp>
         </ThemeProvider>
