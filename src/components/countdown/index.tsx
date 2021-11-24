@@ -21,7 +21,7 @@ export const getCountdownTitle = (duration?: Duration) => {
   const sec = duration && duration.seconds();
 
   const isDurationSet = duration && sec !== undefined && !isNaN(sec)
-  const isEvenReached = sec !== undefined && sec < 0;
+  const isEvenReached = isDurationSet && sec < 0;
 
   return isDurationSet
     ? isEvenReached 
