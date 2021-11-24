@@ -36,7 +36,7 @@ export const Countdown = (props: CountdownProps) => {
 
   return (
     <StyledCountdownContainer>
-      <StyledCountdownTitle>
+      <StyledCountdownTitle data-testid="countdown-title">
         {countdownTitle}
       </StyledCountdownTitle>
     </StyledCountdownContainer>
