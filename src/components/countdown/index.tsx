@@ -22,7 +22,7 @@ export const getCountdownTitle = (duration?: Duration) => {
   const mins: number = duration.minutes();
   const sec: number = duration.seconds();
 
-  const isEvenReached: boolean = sec !== undefined && !isNaN(sec) && sec < 0;
+  const isEvenReached: boolean = sec !== undefined && !isNaN(sec) && sec <= 0;
 
   return isEvenReached 
       ? 'Event Reached' 
