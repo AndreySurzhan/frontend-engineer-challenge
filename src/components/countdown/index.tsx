@@ -15,19 +15,18 @@ export interface CountdownProps {
  * If duration is not passed returns 'Target Date is Not Specified'
  */
 export const getCountdownTitle = (duration?: Duration) => {
-  const days = duration && duration.days();
-  const hours = duration && duration.hours();
-  const mins = duration && duration.minutes();
-  const sec = duration && duration.seconds();
+  if(!duration || !duration.isValid()) return 'Target Date is Not Specified';
 
-  const isDurationSet = duration && sec !== undefined && !isNaN(sec)
-  const isEvenReached = isDurationSet && sec < 0;
+  const days: number = duration.days();
+  const hours: number = duration.hours();
+  const mins: number = duration.minutes();
+  const sec: number = duration.seconds();
 
-  return isDurationSet
-    ? isEvenReached 
+  const isEvenReached: boolean = sec !== undefined && !isNaN(sec) && sec < 0;
+
+  return isEvenReached 
       ? 'Event Reached' 
-      :`${days} days ${hours} hours ${mins} minutes ${sec} seconds` 
-    : 'Target Date is Not Specified';
+      :`${days} days ${hours} hours ${mins} minutes ${sec} seconds`;
 }
 
 export const Countdown = (props: CountdownProps) => {
