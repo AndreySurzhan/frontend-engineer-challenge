@@ -30,7 +30,7 @@ describe('Picking date time', () => {
     render(<ThemeProvider theme={{}}><App /></ThemeProvider>);
   });
 
-  test('should countdown value if date is in future', async () => {
+  test('should display countdown value if date is in future', async () => {
     const datetimeInput = await screen.findByDisplayValue('');
     const tomorrow = moment().add(1, 'days').format('MM/DD/YYYY hh:mm A');
     console.log(tomorrow)
@@ -44,7 +44,7 @@ describe('Picking date time', () => {
     });
   });
 
-  test('should countdown Event Reached if date is in past', async () => {
+  test('should display "Event Reached" if date is in past', async () => {
     const datetimeInput = await screen.findByDisplayValue('');
     const tomorrow = moment().add(-1, 'days').format('MM/DD/YYYY hh:mm A');
     console.log(tomorrow)
