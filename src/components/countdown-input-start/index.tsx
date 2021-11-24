@@ -12,7 +12,7 @@ export interface CountdownInputStartProps {
 export const CountdownInputStart = (props: CountdownInputStartProps) => {
     return (
         <StyledCountdownInputStart>
-            <h3>Select Event Datetime</h3>
+            <h2>Select Event Datetime</h2>
             <ReactDatetimeClass value={props.value} onChange={props.onChange}></ReactDatetimeClass>
         </StyledCountdownInputStart>
     );
