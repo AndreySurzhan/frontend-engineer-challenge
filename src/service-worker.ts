@@ -13,6 +13,8 @@ import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
+import {CacheableResponsePlugin} from 'workbox-cacheable-response';
+
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -71,15 +73,15 @@ registerRoute(
 
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.includes('web-config'),
+  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('/web-config'),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new NetworkFirst({
     cacheName: 'web-config',
     plugins: [
-      // Ensure that once this runtime cache reaches a maximum size the
-      // least-recently used images are removed.
-      new ExpirationPlugin({ maxEntries: 10 }),
-    ],
+      new CacheableResponsePlugin({
+        statuses: [200],
+      })
+    ]
   })
 );
 
