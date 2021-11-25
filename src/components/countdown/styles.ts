@@ -11,4 +11,5 @@ export const StyledCountdownContainer = styled.div`
 
 export const StyledCountdownTitle = styled.h2`
   font-size: 2rem;
+  text-align: center;
 `;
