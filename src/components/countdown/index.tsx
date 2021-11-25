@@ -12,10 +12,10 @@ export interface CountdownProps {
  * Holds data reflacting time distance between now and Future Event Date
  * @returns {string} - If Duration is passed - returns diration in 'd hh:mm:ss' format. 
  * If duration is passed and event is in past - returns 'Event Reached.
- * If duration is not passed returns 'Target Date is Not Specified'
+ * If duration is not passed returns 'Event Date is Not Specified'
  */
 export const getCountdownTitle = (duration?: Duration) => {
-  if(!duration || !duration.isValid()) return 'Target Date is Not Specified';
+  if(!duration || !duration.isValid()) return 'Event Date is Not Specified';
 
   const days: number = duration.days();
   const hours: number = duration.hours();

@@ -20,7 +20,7 @@ describe('Child components', () => {
   });
 
   test('should render countdown text', async () => {
-    const result = await screen.findByText('Target Date is Not Specified');
+    const result = await screen.findByText('Event Date is Not Specified');
     expect(result).toBeInTheDocument();
   });
 });
