@@ -73,7 +73,7 @@ registerRoute(
 
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
-  ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('/web-config'),
+  ({ url }) => url.pathname.endsWith('/web-config'),
   // Customize this strategy as needed, e.g., by changing to CacheFirst.
   new NetworkFirst({
     cacheName: 'web-config',
