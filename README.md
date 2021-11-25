@@ -28,10 +28,9 @@ This codebase uses React, Typescript, and Styled Components as they are the prim
 1. Deploy to Github-pages (https://andreysurzhan.github.io/frontend-engineer-challenge/)
 1. Added unit tests
 1. CI/CD Added support for auto test, build and deploy to Github pages on commit to `main` branch
+1. Add support for service worker. Caching static assets and response from `web-config` request. *App works offline*
+1. Update manifest to include more icons and discription. Possible to install app as native
 
-## Nest steps
-1. Add support for service worker
-1. Update manifest to include more icons and discription
 
 ### Installation
 
