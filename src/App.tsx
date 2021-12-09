@@ -30,8 +30,12 @@ class App extends React.Component {
   async componentDidMount() {
     try {
       const themeData = await api.getTheme();
+      const eventDate: Moment | null = this.getEventDate();
 
-      this.setState({ theme: themeData });
+      this.setState({
+         theme: themeData,
+         eventDate
+       });
     } catch (error) {
       console.log(error)
     }
@@ -50,7 +54,7 @@ class App extends React.Component {
    * Callback function to pass to CountdownInputStart component.
    * This function is supposed to be called with current context when user selects data/time in datetime picker input.
    * Function sets eventDate, clears countdown existing interval and sets new interval with new passed date
-   * @param {Moment | null} eventDate - Date in Moment format that represents when Future event is supposed to start.
+   * @param {Moment | string} eventDate - Date in Moment format that represents when Future event is supposed to start.
    * @returns {void}
  */
    handleEventDateSet = (eventDate?: Moment | string): void => {
@@ -59,6 +63,10 @@ class App extends React.Component {
     clearInterval(this.countdownIntervalId);
 
     this.countdownIntervalId = setInterval(this.countdownFromEventtDate(moment(eventDate)), 1000);
+
+    window
+    .localStorage
+    .setItem('eventDate',  eventDate ? eventDate.toString() : '');
   }
 
   /**
@@ -79,6 +87,13 @@ class App extends React.Component {
    * @returns {Duration | null}
  */
   getCountdownDuration = (eventDate?: Moment): Duration | null => eventDate ? duration(eventDate.diff(moment.now())) : null;
+
+  private getEventDate = (): Moment | null => {
+    const savedEventDate: string | null = window.localStorage.getItem('eventDate');
+    const eventDate: Moment | null = savedEventDate ? moment(savedEventDate) : null;
+
+    return eventDate;
+  }
     
   render() {
     const data = this.state.theme && this.state.theme.data && this.state.theme.data.data;
@@ -92,6 +107,7 @@ class App extends React.Component {
             <Countdown duration={this.state.duration}/>
           </StyledApp>
         </ThemeProvider>
+        //TODO: Spinner or loading indicator
       )
     )
   }

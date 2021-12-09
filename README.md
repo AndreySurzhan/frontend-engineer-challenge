@@ -49,3 +49,8 @@ This codebase uses React, Typescript, and Styled Components as they are the prim
     ```
 
 4. Once it's done compiling, view the site at: [`http://localhost:3000/`](http://localhost:3000/).
+
+
+Data persistence.
+- state of the countdown - > Cookie, Session or Local Storage, IndexDB
+- 

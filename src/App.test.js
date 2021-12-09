@@ -46,9 +46,9 @@ describe('Picking date time', () => {
 
   test('should display "Event Reached" if date is in past', async () => {
     const datetimeInput = await screen.findByDisplayValue('');
-    const tomorrow = moment().add(-1, 'days').format('MM/DD/YYYY hh:mm A');
+    const yesterday = moment().add(-1, 'days').format('MM/DD/YYYY hh:mm A');
 
-    fireEvent.change(datetimeInput, {target: {value: `${tomorrow}`}}); 
+    fireEvent.change(datetimeInput, {target: {value: `${yesterday}`}}); 
 
     await waitFor(() => {
       const result = screen.getByTestId('countdown-title');
