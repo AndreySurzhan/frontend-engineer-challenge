@@ -6,6 +6,7 @@ import App from './App';
 
 describe('Child components', () => {
   beforeEach(() => {
+
     render(<ThemeProvider theme={{}}><App /></ThemeProvider>);
   });
 
@@ -27,6 +28,7 @@ describe('Child components', () => {
 
 describe('Picking date time', () => {
   beforeEach(() => {
+    window.localStorage.removeItem('eventDate')
     render(<ThemeProvider theme={{}}><App /></ThemeProvider>);
   });
 
